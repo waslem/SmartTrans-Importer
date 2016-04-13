@@ -11,10 +11,13 @@ namespace SmartTrans_Importer.Tests
         public void TestGetDataFromStaging()
         {
 
-            var Date = new DateTime(2016, 06, 04);
+            var Date = new DateTime(2016, 04, 06);
             var Agent = "JVW";
 
             string result = DataQuery.GetRunsheet(Date, Agent);
+
+
+            Console.WriteLine(result);
 
         }
     }
