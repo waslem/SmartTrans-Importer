@@ -1,11 +1,7 @@
 ﻿using FileHelpers;
 using SmartTrans_Importer.Core.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using static SmartTrans_Importer.Core.Models.ExportRecord;
 
 namespace SmartTrans_Importer.Core
 {
@@ -19,7 +15,20 @@ namespace SmartTrans_Importer.Core
 
             string path = SmartTrans_Importer.Properties.Settings.Default.CsvExportLocation;
 
-            using (engine.BeginWriteFile(path))
+            // eg CSM-20140903-3
+
+            string driver = calc.CollectRecords[0].Driver;
+            string date = calc.CollectRecords[0].Date;
+
+            DateTime date2;
+
+            DateTime.TryParse(date, out  date2);
+
+            int dow = (int)date2.DayOfWeek;
+
+            string filename = path + driver + "-" + date2.ToString("yyyyMMdd") + "-" + dow.ToString() +  ".csv";
+
+            using (engine.BeginWriteFile(filename))
             {
                 foreach (var record in calc.CollectRecords)
                 {

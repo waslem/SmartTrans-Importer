@@ -49,6 +49,8 @@ namespace SmartTrans_Importer
                 calc = new Calculator((DateTime)AgentRunDate.SelectedDate, comboAgents.SelectedValue.ToString());
                 calc.ComputeFields(db);
                 Exporter.ExporttoCsv(calc);
+
+                MessageBox.Show("File Exported to:" + Properties.Settings.Default.CsvExportLocation.ToString());
             }
             else
             {

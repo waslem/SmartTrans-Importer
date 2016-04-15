@@ -32,7 +32,7 @@ namespace SmartTrans_Importer.Core
                 status = Status.OK;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 status = Status.ERROR;
             }

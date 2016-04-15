@@ -25,7 +25,7 @@ namespace SmartTrans_Importer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\file.csv")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\")]
         public string CsvExportLocation {
             get {
                 return ((string)(this["CsvExportLocation"]));

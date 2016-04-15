@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="CsvExportLocation" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\temp\file.csv</Value>
+      <Value Profile="(Default)">C:\temp\</Value>
     </Setting>
   </Settings>
 </SettingsFile>
