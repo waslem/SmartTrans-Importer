@@ -43,6 +43,11 @@ namespace SmartTrans_Importer.Core
             Drivers.Add(new Driver { AgentId = "CH", Name = "C HAGART" });
         }
 
+        internal string FindDriverCode(string driver)
+        {
+            return Drivers.First(u => u.Name == driver).AgentId;
+        }
+
         /// <summary>
         /// Writes the given object instance to an XML file.
         /// <para>Only Public properties and variables will be written to the file. These can be any type though, even other classes.</para>

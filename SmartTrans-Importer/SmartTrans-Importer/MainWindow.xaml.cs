@@ -47,7 +47,7 @@ namespace SmartTrans_Importer
             if (AgentRunDate.SelectedDate != null)
             {
                 calc = new Calculator((DateTime)AgentRunDate.SelectedDate, comboAgents.SelectedValue.ToString());
-                calc.ComputeFields();
+                calc.ComputeFields(db);
                 calc.ExportToFile();
 
             }
