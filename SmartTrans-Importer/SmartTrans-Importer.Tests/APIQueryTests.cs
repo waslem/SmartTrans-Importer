@@ -33,9 +33,8 @@ namespace SmartTrans_Importer.Tests
             string result = DataQuery.GetRunsheet(Date, Agent);
 
             var answer = JsonConvert.DeserializeObject<List<SmartTransRecord>>(result);
-            //var dict = JsonConvert.DeserializeObject<List<SmartTransRecord>>(result);
 
-           // Console.WriteLine("Finished");
+
             Console.WriteLine();
         }
     }

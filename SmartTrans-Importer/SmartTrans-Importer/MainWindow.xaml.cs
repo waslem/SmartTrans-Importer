@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SmartTrans_Importer.Core;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,39 @@ namespace SmartTrans_Importer
     /// </summary>
     public partial class MainWindow : Window
     {
+        public DriverDB db;
+        public Calculator calc;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            db = new DriverDB();
+
+            comboAgents.ItemsSource = db.GetDrivers();
+            comboAgents.SelectedValuePath = "AgentId";
+            comboAgents.DisplayMemberPath = "Name";
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            db.SaveDrivers();
+        }
+
+        private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            if (AgentRunDate.SelectedDate != null)
+            {
+                calc = new Calculator((DateTime)AgentRunDate.SelectedDate, comboAgents.SelectedValue.ToString());
+                calc.ComputeFields();
+                calc.ExportToFile();
+
+            }
+            else
+            {
+                MessageBox.Show("No Date", "Please select a Date");
+            }
         }
     }
 }

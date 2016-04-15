@@ -5,8 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartTrans_Importer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" Closing="Window_Closing">
     <Grid>
-        
+        <Button x:Name="Submit" Content="Download" HorizontalAlignment="Left" Margin="68,150,0,0" VerticalAlignment="Top" Width="75" Click="Submit_Click"/>
+        <DatePicker Name="AgentRunDate" HorizontalAlignment="Left" Margin="46,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.176,0.292" Width="120"/>
+        <ProgressBar HorizontalAlignment="Left" Height="10" Margin="10,300,0,0" VerticalAlignment="Top" Width="500"/>
+        <ComboBox x:Name="comboAgents" HorizontalAlignment="Left" Margin="46,100,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBlock Text="--Select Agent--" IsHitTestVisible="False" Margin="60,102,374,198">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+
+                    <Style.Setters>
+                        <Setter Property="Visibility" Value="Hidden"/>
+                    </Style.Setters>
+
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=comboAgents,Path=SelectedItem}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
     </Grid>
 </Window>
