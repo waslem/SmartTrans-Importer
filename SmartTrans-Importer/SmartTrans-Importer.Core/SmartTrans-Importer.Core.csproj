@@ -30,10 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FileHelpers, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
+      <HintPath>..\packages\FileHelpers.3.1.5\lib\net45\FileHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +53,7 @@
     <Compile Include="DataQuery.cs" />
     <Compile Include="DriverDB.cs" />
     <Compile Include="Exporter.cs" />
+    <Compile Include="Models\ExportRecord.cs" />
     <Compile Include="Models\CollectImportRecord.cs" />
     <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\SmartTransRecord.cs" />
@@ -57,6 +63,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Settings.Designer.cs" />
     <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>

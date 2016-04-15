@@ -1,14 +1,10 @@
 ﻿using FileHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace SmartTrans_Importer.Core.Models
 {
-    public class CollectImportRecord
+    [DelimitedRecord(",")]
+    public class ExportRecord
     {
         public String Identifier { get; set; }
         public String File { get; set; }
@@ -27,10 +23,5 @@ namespace SmartTrans_Importer.Core.Models
         public String Date2 { get; set; }
         public String Date3 { get; set; }
         public String Driver { get; set; }
-
-        // non exported fields
-        public int CompletedCount { get; set; }
-        public int AttemptedCount { get; set; }
-
     }
 }

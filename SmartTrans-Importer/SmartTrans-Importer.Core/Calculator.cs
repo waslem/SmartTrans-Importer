@@ -316,10 +316,5 @@ namespace SmartTrans_Importer.Core
 
             return "OTHER";
         }
-
-        public void ExportToFile()
-        {
-
-        }
     }
 }
