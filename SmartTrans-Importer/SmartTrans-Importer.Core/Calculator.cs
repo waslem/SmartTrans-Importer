@@ -19,6 +19,34 @@ namespace SmartTrans_Importer.Core
 
         public Status status;
 
+        public Calculator()
+        {
+            ImportRecords = new List<SmartTransRecord>();
+            CollectRecords = new List<CollectImportRecord>();
+
+        }
+
+        public Calculator Calculate(DateTime Date, String Agent)
+        {
+            try
+            {
+                string result = DataQuery.GetRunsheet(Date, Agent);
+                ImportRecords = JsonConvert.DeserializeObject<List<SmartTransRecord>>(result);
+
+                ImportRecords.RemoveAt(0);
+                ImportRecords.RemoveAt(ImportRecords.Count - 1);
+
+                status = Status.OK;
+
+            }
+            catch (Exception)
+            {
+                status = Status.ERROR;
+            }
+
+            return this;
+        }
+
         public Calculator(DateTime Date, String Agent)
         {
             try
@@ -91,6 +119,7 @@ namespace SmartTrans_Importer.Core
             }
         }
 
+
         private CollectImportRecord CalculateComments(SmartTransRecord record, CollectImportRecord r)
         {
             int stringLength = record.Reasons.Length;
@@ -102,20 +131,20 @@ namespace SmartTrans_Importer.Core
             else if (stringLength < 120)
             {
                 r.Comment2 = record.Reasons.Substring(0, 60);
-                r.Comment3 = record.Reasons.Substring(61, (stringLength - 60)); // this number has to be the remainder not 60
+                r.Comment3 = record.Reasons.Substring(61, (stringLength - 60)); // this number is the remainder
             }
             else if (stringLength < 180)
             {
                 r.Comment2 = record.Reasons.Substring(0, 60);
                 r.Comment3 = record.Reasons.Substring(61, 60);
-                r.Comment4 = record.Reasons.Substring(121, (stringLength - 121)); // this number has to be the remainder not 60
+                r.Comment4 = record.Reasons.Substring(121, (stringLength - 121)); // this number is the remainder
             }
             else if (stringLength < 240)
             {
                 r.Comment2 = record.Reasons.Substring(0, 60);
                 r.Comment3 = record.Reasons.Substring(61, 60);
                 r.Comment4 = record.Reasons.Substring(121, 60);
-                r.Comment5 = record.Reasons.Substring(181, (stringLength - 181)); // this number has to be the remainder not 60
+                r.Comment5 = record.Reasons.Substring(181, (stringLength - 181)); // this number is the remainder
 
             }
             else if (stringLength < 300)
@@ -124,7 +153,7 @@ namespace SmartTrans_Importer.Core
                 r.Comment3 = record.Reasons.Substring(61, 60);
                 r.Comment4 = record.Reasons.Substring(121, 60);
                 r.Comment5 = record.Reasons.Substring(181, 60);
-                r.Comment6 = record.Reasons.Substring(241, (stringLength - 241)); // this number has to be the remainder not 60
+                r.Comment6 = record.Reasons.Substring(241, (stringLength - 241)); // this number is the remainder
             }
             else
             {
@@ -133,7 +162,7 @@ namespace SmartTrans_Importer.Core
                 r.Comment4 = record.Reasons.Substring(121, 60);
                 r.Comment5 = record.Reasons.Substring(181, 60);
                 r.Comment6 = record.Reasons.Substring(241, 60);
-                r.Comment7 = record.Reasons.Substring(301, (stringLength - 301)); // this number has to be the remainder not 60
+                r.Comment7 = record.Reasons.Substring(301, (stringLength - 301)); // this number is the remainder
             }
 
             return r;
@@ -156,7 +185,6 @@ namespace SmartTrans_Importer.Core
                         contents += child.InnerText;
                     }
                 }
-
             }
             else
             {

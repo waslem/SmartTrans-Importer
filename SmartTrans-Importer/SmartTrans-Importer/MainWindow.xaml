@@ -4,21 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartTrans_Importer"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Closing="Window_Closing">
+        Title="MainWindow" Height="360" Width="640" Closing="Window_Closing">
     <Grid>
-        <Button x:Name="Submit" Content="Download" HorizontalAlignment="Left" Margin="68,150,0,0" VerticalAlignment="Top" Width="75" Click="Submit_Click"/>
-        <DatePicker Name="AgentRunDate" HorizontalAlignment="Left" Margin="46,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.176,0.292" Width="120"/>
-        <ProgressBar HorizontalAlignment="Left" Height="10" Margin="10,300,0,0" VerticalAlignment="Top" Width="500"/>
-        <ComboBox x:Name="comboAgents" HorizontalAlignment="Left" Margin="46,100,0,0" VerticalAlignment="Top" Width="120" />
-        <TextBlock Text="--Select Agent--" IsHitTestVisible="False" Margin="60,102,374,198">
+        <StackPanel VerticalAlignment="Top">
+            <Menu Width="Auto" Height="20">
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="140"/>
+                </MenuItem>
+                <MenuItem Header="_Tools">
+                    <MenuItem x:Name="Options" Header="_Options" HorizontalAlignment="Left" Width="140"/>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem x:Name="About" Header="_About" HorizontalAlignment="Left" Width="140"/>
+                </MenuItem>
+            </Menu>
+            <Label Content=""/>
+        </StackPanel>
+        <Button x:Name="Submit" Content="Download" HorizontalAlignment="Left" Margin="108,263,0,0" VerticalAlignment="Top" Width="75"/>
+        <DatePicker Name="AgentRunDate" HorizontalAlignment="Left" Margin="86,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.176,0.292" Width="120"/>
+        <ComboBox x:Name="comboAgents" HorizontalAlignment="Left" Margin="86,212,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBlock Text="--Select Agent--" IsHitTestVisible="False" Margin="100,214,426,32">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
-
                     <Style.Setters>
                         <Setter Property="Visibility" Value="Hidden"/>
                     </Style.Setters>
-
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding ElementName=comboAgents,Path=SelectedItem}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Visible"/>
@@ -27,5 +39,9 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
+        <Image x:Name="logo" HorizontalAlignment="Left" Height="125" Margin="121,21,0,0" VerticalAlignment="Top" Width="400" Source="/Images/main_logo.jpg"/>
+        <Image Name="loading_gif" gif:ImageBehavior.RepeatBehavior="0x"
+               gif:ImageBehavior.AnimatedSource="/Images/squares.gif" Margin="283,172,230,96" />
+        <Label x:Name="loading_Label" Content="Downloading run..." HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Height="42" Width="200" FontFamily="Times New Roman" FontSize="24"/>
     </Grid>
 </Window>
