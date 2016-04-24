@@ -1,0 +1,49 @@
+﻿<Page x:Class="SmartTrans_Importer.Views.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SmartTrans_Importer.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="380" d:DesignWidth="640"
+    >
+
+    <Grid>
+        <StackPanel VerticalAlignment="Top">
+            <Menu Width="Auto" Height="20">
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="140" Click="AppExit_Click" />
+                </MenuItem>
+                <MenuItem Header="_Tools">
+                    <MenuItem x:Name="Options" Header="_Options" HorizontalAlignment="Left" Width="140" Click="Options_Click"/>
+                    <MenuItem x:Name="Agents" Header="_Edit Agents" HorizontalAlignment="Left" Width="140" />
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem x:Name="About" Header="_About" HorizontalAlignment="Left" Width="140" Click="About_Click" />
+                </MenuItem>
+            </Menu>
+            <Label Content=""/>
+        </StackPanel>
+        <Button x:Name="Submit" Content="Download" HorizontalAlignment="Left" Margin="108,263,0,0" VerticalAlignment="Top" Width="75" Click="Submit_Click"/>
+        <DatePicker Name="AgentRunDate" HorizontalAlignment="Left" Margin="86,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.176,0.292" Width="120"/>
+        <ComboBox x:Name="comboAgents" HorizontalAlignment="Left" Margin="86,212,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBlock Text="--Select Agent--" IsHitTestVisible="False" Margin="97,214,426,32">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Setters>
+                        <Setter Property="Visibility" Value="Hidden"/>
+                    </Style.Setters>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=comboAgents,Path=SelectedItem}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <Image x:Name="logo" HorizontalAlignment="Left" Height="125" Margin="115,20,0,0" VerticalAlignment="Top" Width="400" Source="/Images/main_logo.jpg"/>
+        <Label x:Name="lbl_dl" Content="Downloading data..." HorizontalAlignment="Left" Margin="402,160,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_calc" Content="Calculating fields..." HorizontalAlignment="Left" Margin="402,160,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_export" Content="Exporting csv..." HorizontalAlignment="Left" Margin="404,160,0,0" VerticalAlignment="Top" />
+    </Grid>
+</Page>
