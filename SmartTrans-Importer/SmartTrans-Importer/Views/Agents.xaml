@@ -27,10 +27,11 @@
         <Image x:Name="logo" HorizontalAlignment="Left" Height="125" Margin="115,20,0,0" VerticalAlignment="Top" Width="400" Source="/Images/main_logo.jpg"/>
 
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="118" Margin="65,159,0,0" VerticalAlignment="Top" Width="200" SelectionMode="Multiple" />
-        <Button x:Name="btn_Back" Content="Back" HorizontalAlignment="Left" Margin="506,305,0,0" VerticalAlignment="Top" Width="75" Click="btn_Back_Click"/>
-        <Button x:Name="btn_AddDriver" Content="Add Driver" HorizontalAlignment="Left" Margin="507,216,0,0" VerticalAlignment="Top" Width="74" Click="btn_AddDriver_Click"/>
-        <TextBox x:Name="txt_CollectName" HorizontalAlignment="Left" Height="24" Margin="461,159,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="txt_eSolutionsName" HorizontalAlignment="Left" Height="24" Margin="461,187,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        
+        <Button x:Name="btn_Back" Content="Back" HorizontalAlignment="Left" Margin="505,306,0,0" VerticalAlignment="Top" Width="75" Click="btn_Back_Click"/>
+        <Button x:Name="btn_AddDriver" Content="Add Driver" HorizontalAlignment="Left" Margin="505,216,0,0" VerticalAlignment="Top" Width="74" Click="btn_AddDriver_Click"/>
+        <TextBox x:Name="txt_CollectName" HorizontalAlignment="Left" Height="24" Margin="461,159,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="118" />
+        <TextBox x:Name="txt_eSolutionsName" HorizontalAlignment="Left" Height="24" Margin="461,187,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="118"/>
         <Label x:Name="lbl_AddDriver" Content="Add New Driver" HorizontalAlignment="Left" Margin="410,125,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label x:Name="lbl_Collect" Content="Collect username:" HorizontalAlignment="Left" Margin="352,156,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_eSolutions" Content="eSolutions username:" HorizontalAlignment="Left" Margin="333,185,0,0" VerticalAlignment="Top"/>
