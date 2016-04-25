@@ -44,7 +44,7 @@
         <GroupBox x:Name="groupBox" Header="Import A Run" HorizontalAlignment="Left" Margin="40,135,0,0" VerticalAlignment="Top" Height="180" Width="205">
             <DatePicker x:Name="AgentRunDate" HorizontalAlignment="Left" Margin="35,25,0,0" VerticalAlignment="Top" Width="120"/>
         </GroupBox>
-        <GroupBox x:Name="groupBox1" Header="Outcome" HorizontalAlignment="Left" Margin="320,210,0,0" VerticalAlignment="Top" Height="95" Width="275">
+        <GroupBox x:Name="groupBox1" Header="Outcome" HorizontalAlignment="Left" Margin="320,210,0,0" VerticalAlignment="Top" Height="105" Width="275">
             <Grid>
                 <Label x:Name="lbl_Result" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lbl_Result3" HorizontalAlignment="Left" Margin="25,35,0,0" VerticalAlignment="Top"/>
