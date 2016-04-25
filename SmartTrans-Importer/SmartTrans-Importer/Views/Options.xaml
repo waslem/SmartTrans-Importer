@@ -24,20 +24,21 @@
         </StackPanel>
         <Image x:Name="logo" HorizontalAlignment="Left" Height="125" Margin="115,20,0,0" VerticalAlignment="Top" Width="400" Source="/Images/main_logo.jpg"/>
 
-        <Button x:Name="btn_Back" Content="Back" HorizontalAlignment="Left" Margin="422,297,0,0" VerticalAlignment="Top" Width="75" Click="btn_Back_Click"/>
-        <Button x:Name="btn_Save" Content="Save" HorizontalAlignment="Left" Margin="522,297,0,0" VerticalAlignment="Top" Width="75" Click="btn_Save_Click"/>
-        <Label x:Name="lbl_Export" Content="Export Location:" HorizontalAlignment="Left" Margin="83,135,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_ApiUrl" Content="API URL:" HorizontalAlignment="Left" Margin="83,161,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_eSolUser" Content="eSolution Login:" HorizontalAlignment="Left" Margin="82,187,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_eSolPass" Content="eSolutions Password:" HorizontalAlignment="Left" Margin="82,213,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_Proxy" Content="Proxy Address:" HorizontalAlignment="Left" Margin="83,239,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_ProxyPort" Content="Proxy Port:" HorizontalAlignment="Left" Margin="83,265,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_eSolLogin" HorizontalAlignment="Left" Height="23" Margin="215,189,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-        <TextBox x:Name="txt_ApiUrl" HorizontalAlignment="Left" Height="23" Margin="215,164,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-        <TextBox x:Name="txt_eSolPass" HorizontalAlignment="Left" Height="23" Margin="215,215,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-        <TextBox x:Name="txt_proxyAdd" HorizontalAlignment="Left" Height="23" Margin="215,242,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-        <TextBox x:Name="txt_ProxyPort" HorizontalAlignment="Left" Height="23" Margin="215,268,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-        <Button x:Name="btn_SetLocation" Content="Set Export Location" HorizontalAlignment="Left" Margin="215,139,0,0" VerticalAlignment="Top" Width="125" Click="btn_SetLocation_Click"/>
-        <Label x:Name="lbl_Current" HorizontalAlignment="Left" Margin="345,135,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_Back" Content="Back" HorizontalAlignment="Left" Margin="425,306,0,0" VerticalAlignment="Top" Width="75" Click="btn_Back_Click"/>
+        <Button x:Name="btn_Save" Content="Save" HorizontalAlignment="Left" Margin="505,306,0,0" VerticalAlignment="Top" Width="75" Click="btn_Save_Click"/>
+        <Label x:Name="lbl_Export" Content="File Location:" HorizontalAlignment="Left" Margin="124,137,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_ApiUrl" Content="API URL:" HorizontalAlignment="Left" Margin="148,164,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_eSolUser" Content="eSolution Login:" HorizontalAlignment="Left" Margin="107,192,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_eSolPass" Content="eSolutions Password:" HorizontalAlignment="Left" Margin="82,219,0,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_Proxy" Content="Proxy Address:" HorizontalAlignment="Left" Margin="115,247,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_ProxyPort" Content="Proxy Port:" HorizontalAlignment="Left" Margin="136,275,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_eSolLogin" HorizontalAlignment="Left" Height="23" Margin="208,195,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="212"/>
+        <TextBox x:Name="txt_ApiUrl" HorizontalAlignment="Left" Height="23" Margin="208,167,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="212"/>
+        <PasswordBox x:Name="txt_eSolPass" HorizontalAlignment="Left" Height="22" Margin="208,223,0,0" VerticalAlignment="Top" Width="212"  />
+        <!--<TextBox x:Name="txt_eSolPass" HorizontalAlignment="Left" Height="23" Margin="215,215,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250" />-->
+        <TextBox x:Name="txt_proxyAdd" HorizontalAlignment="Left" Height="23" Margin="208,250,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="212"/>
+        <TextBox x:Name="txt_ProxyPort" HorizontalAlignment="Left" Height="23" Margin="208,278,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="212"/>
+        <Button x:Name="btn_SetLocation" Content="Set Import Location" HorizontalAlignment="Left" Margin="208,141,0,0" VerticalAlignment="Top" Width="125" Click="btn_SetLocation_Click"/>
+        <Label x:Name="lbl_Current" HorizontalAlignment="Left" Margin="345,138,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

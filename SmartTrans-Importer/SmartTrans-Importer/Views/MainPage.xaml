@@ -24,9 +24,9 @@
             </Menu>
             <Label Content=""/>
         </StackPanel>
-        <Button x:Name="Submit" Content="Import" HorizontalAlignment="Left" Margin="80,263,0,0" VerticalAlignment="Top" Width="120" Click="Submit_Click"/>
-        <ComboBox x:Name="comboAgents" HorizontalAlignment="Left" Margin="80,223,0,0" VerticalAlignment="Top" Width="120" />
-        <TextBlock Text="--Select Agent--" IsHitTestVisible="False" Margin="96,225,426,32">
+        <Button x:Name="Submit" Content="Import" HorizontalAlignment="Left" Margin="80,260,0,0" VerticalAlignment="Top" Width="120" Click="Submit_Click"/>
+        <ComboBox x:Name="comboAgents" HorizontalAlignment="Left" Margin="80,220,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBlock Text="--Select Agent--" IsHitTestVisible="False" Margin="96,223,426,32">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Style.Setters>
@@ -41,13 +41,13 @@
             </TextBlock.Style>
         </TextBlock>
         <Image x:Name="logo" HorizontalAlignment="Left" Height="125" Margin="115,20,0,0" VerticalAlignment="Top" Width="400" Source="/Images/main_logo.jpg"/>
-        <GroupBox x:Name="groupBox" Header="Import A Run" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top" Height="175" Width="205">
-            <DatePicker x:Name="AgentRunDate" HorizontalAlignment="Left" Margin="35,30,0,0" VerticalAlignment="Top" Width="120"/>
+        <GroupBox x:Name="groupBox" Header="Import A Run" HorizontalAlignment="Left" Margin="40,135,0,0" VerticalAlignment="Top" Height="180" Width="205">
+            <DatePicker x:Name="AgentRunDate" HorizontalAlignment="Left" Margin="35,25,0,0" VerticalAlignment="Top" Width="120"/>
         </GroupBox>
-        <GroupBox x:Name="groupBox1" Header="Outcome" HorizontalAlignment="Left" Margin="320,210,0,0" VerticalAlignment="Top" Height="95" Width="285">
+        <GroupBox x:Name="groupBox1" Header="Outcome" HorizontalAlignment="Left" Margin="320,210,0,0" VerticalAlignment="Top" Height="95" Width="275">
             <Grid>
-                <Label x:Name="lbl_Result" HorizontalAlignment="Left" Margin="14,20,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="lbl_Result3" HorizontalAlignment="Left" Margin="14,45,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lbl_Result" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lbl_Result3" HorizontalAlignment="Left" Margin="25,35,0,0" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
     </Grid>

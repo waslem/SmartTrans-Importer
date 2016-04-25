@@ -28,7 +28,7 @@ namespace SmartTrans_Importer.Views
             lbl_Current.Content = Core.Settings.Default.CsvExportLocation;
             txt_ApiUrl.Text = Core.Settings.Default.ApiUrl;
             txt_eSolLogin.Text = Core.Settings.Default.eSolutionsLogin;
-            txt_eSolPass.Text = Core.Settings.Default.eSolutionsPassword;
+            txt_eSolPass.Password = Core.Settings.Default.eSolutionsPassword;
             txt_proxyAdd.Text = Core.Settings.Default.ProxyAddress;
             txt_ProxyPort.Text = Core.Settings.Default.ProxyPort.ToString();
 
@@ -47,7 +47,7 @@ namespace SmartTrans_Importer.Views
             {
                 Core.Settings.Default.ApiUrl = txt_ApiUrl.Text;
                 Core.Settings.Default.eSolutionsLogin = txt_eSolLogin.Text;
-                Core.Settings.Default.eSolutionsPassword = txt_eSolPass.Text;
+                Core.Settings.Default.eSolutionsPassword = txt_eSolPass.Password;
                 Core.Settings.Default.ProxyAddress = txt_proxyAdd.Text;
                 Core.Settings.Default.ProxyPort = newPort.ToString();
 
