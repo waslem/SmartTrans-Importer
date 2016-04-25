@@ -13,20 +13,10 @@ namespace SmartTrans_Importer.Core
 
             engine.HeaderText = CreateHeader();
 
-            string path = SmartTrans_Importer.Properties.Settings.Default.CsvExportLocation;
+            string path = Settings.Default.CsvExportLocation;
 
-            // eg CSM-20140903-3
-
-            string driver = calc.CollectRecords[0].Driver;
-            string date = calc.CollectRecords[0].Date;
-
-            DateTime date2;
-
-            DateTime.TryParse(date, out  date2);
-
-            int dow = (int)date2.DayOfWeek;
-
-            string filename = path + driver + "-" + date2.ToString("yyyyMMdd") + "-" + dow.ToString() +  ".csv";
+            // Create the file name from the agent ID and date
+            string filename = GetFileName(calc.CollectRecords[0].Driver, calc.CollectRecords[0].Date, path);
 
             using (engine.BeginWriteFile(filename))
             {
@@ -36,6 +26,22 @@ namespace SmartTrans_Importer.Core
                     engine.WriteNext(exportRecord);
                 }
             }
+        }
+
+        public static string GetFileName(string _driver, string _date, string path)
+        {
+            string driver = _driver;
+            string date = _date;
+
+            DateTime date2;
+
+            DateTime.TryParse(date, out date2);
+
+            int dow = (int)date2.DayOfWeek;
+
+            string filename = path + driver + "-" + date2.ToString("yyyyMMdd") + "-" + dow.ToString() + ".csv";
+
+            return filename;
         }
 
         private static ExportRecord CreateFromCollectImportRecord(CollectImportRecord c_record)

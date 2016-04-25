@@ -13,17 +13,18 @@
         <StackPanel VerticalAlignment="Top">
             <Menu Width="Auto" Height="20">
                 <MenuItem Header="_File">
-                    <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="140" />
+                    <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="150" Click="AppExit_Click" />
                 </MenuItem>
                 <MenuItem Header="_Tools">
-                    <MenuItem x:Name="Options_Menu" Header="_Options" HorizontalAlignment="Left" Width="140"/>
+                    <MenuItem x:Name="Options_Menu" Header="_Options" HorizontalAlignment="Left" Width="150"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
-                    <MenuItem x:Name="About_Menu" Header="_About" HorizontalAlignment="Left" Width="140"/>
+                    <MenuItem x:Name="About_Menu" Header="_About" HorizontalAlignment="Left" Width="150"/>
                 </MenuItem>
             </Menu>
             <Label Content=""/>
         </StackPanel>
         <Label x:Name="lbl_Written" Content="Written By Jamie van Walsum, 2016" HorizontalAlignment="Left" Margin="148,168,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_Back" Content="Back" HorizontalAlignment="Left" Margin="506,305,0,0" VerticalAlignment="Top" Width="75" Click="btn_Back_Click"/>
     </Grid>
 </Page>

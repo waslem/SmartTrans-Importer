@@ -160,7 +160,7 @@ namespace SmartTrans_Importer.Core
 
             if (itemToGet != null)
             {
-                return itemToGet.Name;
+                return itemToGet.AgentId;
             }
             else
             {

@@ -1,4 +1,6 @@
-﻿using SmartTrans_Importer.Views;
+﻿using SmartTrans_Importer.Core;
+using SmartTrans_Importer.Core.Models;
+using SmartTrans_Importer.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +23,12 @@ namespace SmartTrans_Importer
     /// </summary>
     public partial class Main : NavigationWindow
     {
+        public DriverDB db = new DriverDB();
+
         public Main()
         {
             InitializeComponent();
-            base.NavigationService.Navigate(new MainPage());
+            base.NavigationService.Navigate(new MainPage(db));
         }
     }
 }

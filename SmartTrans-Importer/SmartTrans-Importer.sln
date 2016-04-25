@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTrans-Importer", "SmartTrans-Importer\SmartTrans-Importer.csproj", "{6122EA8B-8DBB-49BB-90DD-FBEC03F1FB92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTrans-Importer.GUI", "SmartTrans-Importer\SmartTrans-Importer.GUI.csproj", "{6122EA8B-8DBB-49BB-90DD-FBEC03F1FB92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTrans-Importer.Core", "SmartTrans-Importer.Core\SmartTrans-Importer.Core.csproj", "{C8C3F5B1-0167-4097-AB22-555C16756AD7}"
 EndProject

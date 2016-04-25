@@ -23,20 +23,37 @@ namespace SmartTrans_Importer.Core
             string authToken;
 
             // API authentication
-            HttpWebRequest request = WebRequest.CreateHttp("https://staging.esolution.net.au/webapi/account/login");
+            HttpWebRequest request = WebRequest.CreateHttp(Settings.Default.ApiUrl + "/webapi/account/login");
             request.Method = "POST";
             request.ContentType = "text/json";
             request.Accept = "text/json";
             request.Headers.Add("api_key", apiKey);
+  
+            int port;
+            WebProxy _proxy;
 
+            bool isValid = Int32.TryParse(Settings.Default.ProxyPort, out port);
             // auth vs Baycorp Proxy
-            var _proxy = new WebProxy("auproxy.bcs.corp", 8080);
-            _proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+            // check if setting is an int before using proxy - not sure if this is best?
+            if (isValid)
+            {
+                _proxy = new WebProxy(Settings.Default.ProxyAddress, port);
+                _proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
 
-            request.Proxy = _proxy;
+                request.Proxy = _proxy;
+            }
 
             // POST data for authentication is a JSON formatted string containing Login and Password
-            byte[] content = Encoding.ASCII.GetBytes("{\"Login\":\"epadmin\",\"Password\":\"1234\"}");
+            // Create JSON formatted string using json.net and settings from program options
+            string user = Settings.Default.eSolutionsLogin;
+            string pass = Settings.Default.eSolutionsPassword;
+
+            JObject o = new JObject();
+
+            o.Add("Login", user);
+            o.Add("Password", pass);
+
+            byte[] content = Encoding.ASCII.GetBytes(o.ToString());
             using (var stream = request.GetRequestStream())
             {
                 stream.Write(content, 0, content.Length);
@@ -53,15 +70,23 @@ namespace SmartTrans_Importer.Core
                 }
             }
 
-            request =
-                WebRequest.CreateHttp(string.Format("https://staging.esolution.net.au/webapi/runsheet/{0:yyyy-MM-dd}/{1}",
-                    date, vehicle));
+            request = WebRequest.CreateHttp(string.Format(Settings.Default.ApiUrl + "/webapi/runsheet/{0:yyyy-MM-dd}/{1}", date, vehicle));
+
             request.ContentType = "text/json";
             request.Accept = "text/json";
             request.Headers.Add("api_key", apiKey);
 
+            isValid = Int32.TryParse(Settings.Default.ProxyPort, out port);
+
             // auth vs Baycorp Proxy
-            request.Proxy = _proxy;
+            // check if setting is an int before using proxy - not sure if this is best?
+            if (isValid)
+            {
+                _proxy = new WebProxy(Settings.Default.ProxyAddress, port);
+                _proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+
+                request.Proxy = _proxy;
+            }
 
             // set header value for authentication
             request.Headers.Add("X-Auth-Token", authToken);

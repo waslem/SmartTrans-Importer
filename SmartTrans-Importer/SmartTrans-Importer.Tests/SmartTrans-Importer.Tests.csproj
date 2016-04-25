@@ -62,9 +62,9 @@
       <Project>{C8C3F5B1-0167-4097-AB22-555C16756AD7}</Project>
       <Name>SmartTrans-Importer.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SmartTrans-Importer\SmartTrans-Importer.csproj">
+    <ProjectReference Include="..\SmartTrans-Importer\SmartTrans-Importer.GUI.csproj">
       <Project>{6122ea8b-8dbb-49bb-90dd-fbec03f1fb92}</Project>
-      <Name>SmartTrans-Importer</Name>
+      <Name>SmartTrans-Importer.GUI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

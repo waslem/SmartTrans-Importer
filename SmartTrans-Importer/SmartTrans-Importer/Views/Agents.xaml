@@ -5,10 +5,36 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SmartTrans_Importer.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="380" d:DesignWidth="640"
       Title="Agents">
 
     <Grid>
-        
+        <StackPanel VerticalAlignment="Top">
+            <Menu Width="Auto" Height="20">
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="150" Click="AppExit_Click" />
+                </MenuItem>
+                <MenuItem Header="_Tools">
+                    <MenuItem x:Name="Options" Header="_Options" HorizontalAlignment="Left" Width="150" Click="Options_Click" />
+                    <MenuItem x:Name="Agents_Menu" Header="_Edit Agents" HorizontalAlignment="Left" Width="150" Click="Agents_Menu_Click" />
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem x:Name="About" Header="_About" HorizontalAlignment="Left" Width="150" Click="About_Click" />
+                </MenuItem>
+            </Menu>
+            <Label Content=""/>
+        </StackPanel>
+        <Image x:Name="logo" HorizontalAlignment="Left" Height="125" Margin="115,20,0,0" VerticalAlignment="Top" Width="400" Source="/Images/main_logo.jpg"/>
+
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="118" Margin="65,159,0,0" VerticalAlignment="Top" Width="200" SelectionMode="Multiple" />
+        <Button x:Name="btn_Back" Content="Back" HorizontalAlignment="Left" Margin="506,305,0,0" VerticalAlignment="Top" Width="75" Click="btn_Back_Click"/>
+        <Button x:Name="btn_AddDriver" Content="Add Driver" HorizontalAlignment="Left" Margin="507,216,0,0" VerticalAlignment="Top" Width="74" Click="btn_AddDriver_Click"/>
+        <TextBox x:Name="txt_CollectName" HorizontalAlignment="Left" Height="24" Margin="461,159,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="txt_eSolutionsName" HorizontalAlignment="Left" Height="24" Margin="461,187,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lbl_AddDriver" Content="Add New Driver" HorizontalAlignment="Left" Margin="410,125,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label x:Name="lbl_Collect" Content="Collect username:" HorizontalAlignment="Left" Margin="352,156,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_eSolutions" Content="eSolutions username:" HorizontalAlignment="Left" Margin="333,185,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_DriverList" Content="Drivers" HorizontalAlignment="Left" Margin="130,125,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Button x:Name="btn_Remove" Content="Remove Selected Drivers" HorizontalAlignment="Left" Margin="65,282,0,0" VerticalAlignment="Top" Width="200" Click="btn_Remove_Click"/>
     </Grid>
 </Page>

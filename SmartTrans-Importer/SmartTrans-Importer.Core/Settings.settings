@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SmartTrans_Importer.Core" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CsvExportLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\temp\</Value>
+    </Setting>
+    <Setting Name="ApiUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://staging.esolution.net.au</Value>
+    </Setting>
+    <Setting Name="eSolutionsLogin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">epadmin</Value>
+    </Setting>
+    <Setting Name="eSolutionsPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1234</Value>
+    </Setting>
+    <Setting Name="ProxyAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">auproxy.bcs.corp</Value>
+    </Setting>
+    <Setting Name="ProxyPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">8080</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

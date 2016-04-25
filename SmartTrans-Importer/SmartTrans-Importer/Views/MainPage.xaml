@@ -12,22 +12,21 @@
         <StackPanel VerticalAlignment="Top">
             <Menu Width="Auto" Height="20">
                 <MenuItem Header="_File">
-                    <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="140" Click="AppExit_Click" />
+                    <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="150" Click="AppExit_Click" />
                 </MenuItem>
                 <MenuItem Header="_Tools">
-                    <MenuItem x:Name="Options" Header="_Options" HorizontalAlignment="Left" Width="140" Click="Options_Click"/>
-                    <MenuItem x:Name="Agents" Header="_Edit Agents" HorizontalAlignment="Left" Width="140" />
+                    <MenuItem x:Name="Options" Header="O_ptions" HorizontalAlignment="Left" Width="150" Click="Options_Click"/>
+                    <MenuItem x:Name="Agents" Header="E_dit Agents" HorizontalAlignment="Left" Width="150" Click="Agents_Click"  />
                 </MenuItem>
                 <MenuItem Header="_Help">
-                    <MenuItem x:Name="About" Header="_About" HorizontalAlignment="Left" Width="140" Click="About_Click" />
+                    <MenuItem x:Name="About" Header="A_bout" HorizontalAlignment="Left" Width="150" Click="About_Click" />
                 </MenuItem>
             </Menu>
             <Label Content=""/>
         </StackPanel>
-        <Button x:Name="Submit" Content="Download" HorizontalAlignment="Left" Margin="108,263,0,0" VerticalAlignment="Top" Width="75" Click="Submit_Click"/>
-        <DatePicker Name="AgentRunDate" HorizontalAlignment="Left" Margin="86,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.176,0.292" Width="120"/>
-        <ComboBox x:Name="comboAgents" HorizontalAlignment="Left" Margin="86,212,0,0" VerticalAlignment="Top" Width="120" />
-        <TextBlock Text="--Select Agent--" IsHitTestVisible="False" Margin="97,214,426,32">
+        <Button x:Name="Submit" Content="Import" HorizontalAlignment="Left" Margin="80,263,0,0" VerticalAlignment="Top" Width="120" Click="Submit_Click"/>
+        <ComboBox x:Name="comboAgents" HorizontalAlignment="Left" Margin="80,223,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBlock Text="--Select Agent--" IsHitTestVisible="False" Margin="96,225,426,32">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Style.Setters>
@@ -42,8 +41,14 @@
             </TextBlock.Style>
         </TextBlock>
         <Image x:Name="logo" HorizontalAlignment="Left" Height="125" Margin="115,20,0,0" VerticalAlignment="Top" Width="400" Source="/Images/main_logo.jpg"/>
-        <Label x:Name="lbl_dl" Content="Downloading data..." HorizontalAlignment="Left" Margin="402,160,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_calc" Content="Calculating fields..." HorizontalAlignment="Left" Margin="402,160,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_export" Content="Exporting csv..." HorizontalAlignment="Left" Margin="404,160,0,0" VerticalAlignment="Top" />
+        <GroupBox x:Name="groupBox" Header="Import A Run" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top" Height="175" Width="205">
+            <DatePicker x:Name="AgentRunDate" HorizontalAlignment="Left" Margin="35,30,0,0" VerticalAlignment="Top" Width="120"/>
+        </GroupBox>
+        <GroupBox x:Name="groupBox1" Header="Outcome" HorizontalAlignment="Left" Margin="320,210,0,0" VerticalAlignment="Top" Height="95" Width="285">
+            <Grid>
+                <Label x:Name="lbl_Result" HorizontalAlignment="Left" Margin="14,20,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lbl_Result3" HorizontalAlignment="Left" Margin="14,45,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Page>

@@ -11,13 +11,13 @@
         <StackPanel VerticalAlignment="Top">
             <Menu Width="Auto" Height="20">
                 <MenuItem Header="_File">
-                    <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="140" />
+                    <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="150" Click="AppExit_Click" />
                 </MenuItem>
                 <MenuItem Header="_Tools">
-                    <MenuItem x:Name="Options_Menu" Header="_Options" HorizontalAlignment="Left" Width="140"/>
+                    <MenuItem x:Name="Options_Menu" Header="O_ptions" HorizontalAlignment="Left" Width="140"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
-                    <MenuItem x:Name="About" Header="_About" HorizontalAlignment="Left" Width="140"/>
+                    <MenuItem x:Name="About" Header="A_bout" HorizontalAlignment="Left" Width="140" Click="About_Click"/>
                 </MenuItem>
             </Menu>
             <Label Content=""/>
@@ -32,11 +32,12 @@
         <Label x:Name="lbl_eSolPass" Content="eSolutions Password:" HorizontalAlignment="Left" Margin="82,213,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_Proxy" Content="Proxy Address:" HorizontalAlignment="Left" Margin="83,239,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_ProxyPort" Content="Proxy Port:" HorizontalAlignment="Left" Margin="83,265,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="215,189,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="215,164,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="215,215,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="215,242,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="215,268,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
-        <Button x:Name="btn_SetLocation" Content="Set Export Location" HorizontalAlignment="Left" Margin="270,139,0,0" VerticalAlignment="Top" Width="125"/>
+        <TextBox x:Name="txt_eSolLogin" HorizontalAlignment="Left" Height="23" Margin="215,189,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
+        <TextBox x:Name="txt_ApiUrl" HorizontalAlignment="Left" Height="23" Margin="215,164,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
+        <TextBox x:Name="txt_eSolPass" HorizontalAlignment="Left" Height="23" Margin="215,215,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
+        <TextBox x:Name="txt_proxyAdd" HorizontalAlignment="Left" Height="23" Margin="215,242,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
+        <TextBox x:Name="txt_ProxyPort" HorizontalAlignment="Left" Height="23" Margin="215,268,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
+        <Button x:Name="btn_SetLocation" Content="Set Export Location" HorizontalAlignment="Left" Margin="215,139,0,0" VerticalAlignment="Top" Width="125" Click="btn_SetLocation_Click"/>
+        <Label x:Name="lbl_Current" HorizontalAlignment="Left" Margin="345,135,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

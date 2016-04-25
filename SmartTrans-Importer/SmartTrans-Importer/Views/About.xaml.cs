@@ -24,5 +24,15 @@ namespace SmartTrans_Importer.Views
         {
             InitializeComponent();
         }
+
+        private void btn_Back_Click(object sender, RoutedEventArgs e)
+        {
+            base.NavigationService.Navigate(new MainPage(null));
+        }
+
+        private void AppExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
