@@ -51,12 +51,13 @@ namespace SmartTrans_Importer.Views
                 Core.Settings.Default.ProxyAddress = txt_proxyAdd.Text;
                 Core.Settings.Default.ProxyPort = newPort.ToString();
 
+                Core.Settings.Default.Save();
                 base.NavigationService.Navigate(new MainPage(null));
             }
             else
             {
                 System.Windows.MessageBox.Show("Invalid Proxy port, please enter a valid port.");
-            }     
+            }
         }
 
         private void btn_SetLocation_Click(object sender, RoutedEventArgs e)
@@ -68,8 +69,10 @@ namespace SmartTrans_Importer.Views
             if (result == DialogResult.OK)
             {
                 // save new location
-                Core.Settings.Default.CsvExportLocation = exportDialog.SelectedPath;
+                Core.Settings.Default.CsvExportLocation = exportDialog.SelectedPath + @"\";
                 lbl_Current.Content = Core.Settings.Default.CsvExportLocation;
+
+                Core.Settings.Default.Save();
             }
         }
 

@@ -76,20 +76,29 @@ namespace SmartTrans_Importer.Views
 
                     calc.ComputeFields(db);
 
-                    Exporter.ExporttoCsv(calc);
+                    if (calc.status == Status.OK)
+                    {
+                        Exporter.ExporttoCsv(calc);
 
-                    lbl_Result.Content = "Success. File Saved to:";
-                    lbl_Result3.Content =
-                        Core.Exporter.GetFileName(calc.CollectRecords[0].Driver, calc.CollectRecords[0].Date, Core.Settings.Default.CsvExportLocation);
+                        lbl_Result.Content = "Success. File Saved to:";
+                        lbl_Result3.Content =
+                            Core.Exporter.GetFileName(calc.CollectRecords[0].Driver, calc.CollectRecords[0].Date, Core.Settings.Default.CsvExportLocation);
 
-                    lbl_Result.Visibility = Visibility.Visible;
-                    groupBox1.Visibility = Visibility.Visible;
+                        lbl_Result.Visibility = Visibility.Visible;
+                        groupBox1.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        lbl_Result.Content = "Failed. No Data for this agent and date.";
+                        lbl_Result.Visibility = Visibility.Visible;
+                        groupBox1.Visibility = Visibility.Visible;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("No Date", "Please select a Date");
-                    lbl_Result.Content = "Failed!, No Date Selected.";
+                    lbl_Result.Content = "Failed. No Date Selected.";
                     lbl_Result.Visibility = Visibility.Visible;
+                    groupBox1.Visibility = Visibility.Visible;
                 }
             }));
 

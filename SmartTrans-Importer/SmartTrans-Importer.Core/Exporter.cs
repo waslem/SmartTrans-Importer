@@ -15,6 +15,7 @@ namespace SmartTrans_Importer.Core
 
             string path = Settings.Default.CsvExportLocation;
 
+            
             // Create the file name from the agent ID and date
             string filename = GetFileName(calc.CollectRecords[0].Driver, calc.CollectRecords[0].Date, path);
 
