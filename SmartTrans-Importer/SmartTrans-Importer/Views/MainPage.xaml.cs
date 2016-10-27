@@ -82,7 +82,7 @@ namespace SmartTrans_Importer.Views
 
                         lbl_Result.Content = "Success. File Saved to:";
                         lbl_Result3.Content =
-                            Core.Exporter.GetFileName(calc.CollectRecords[0].Driver, calc.CollectRecords[0].Date, Core.Settings.Default.CsvExportLocation);
+                            Core.Exporter.GetFileName(calc.ImportRecords[0].Vehicle, calc.CollectRecords[0].Date, Core.Settings.Default.CsvExportLocation);
 
                         lbl_Result.Visibility = Visibility.Visible;
                         groupBox1.Visibility = Visibility.Visible;

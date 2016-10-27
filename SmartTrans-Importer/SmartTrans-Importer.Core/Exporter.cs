@@ -17,7 +17,7 @@ namespace SmartTrans_Importer.Core
 
             
             // Create the file name from the agent ID and date
-            string filename = GetFileName(calc.CollectRecords[0].Driver, calc.CollectRecords[0].Date, path);
+            string filename = GetFileName(calc.ImportRecords[0].Vehicle, calc.CollectRecords[0].Date, path);
 
             using (engine.BeginWriteFile(filename))
             {

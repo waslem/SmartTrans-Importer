@@ -14,7 +14,7 @@ namespace SmartTrans_Importer.Core.Models
         public string OrderNumber { get; set; }
 
         [JsonProperty("DeliveryDate")]
-        public DateTime DeliveryDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
 
         [JsonProperty("ETA")]
         public string ETA { get; set; }
@@ -41,7 +41,7 @@ namespace SmartTrans_Importer.Core.Models
         public string Suburb { get; set; }
 
         [JsonProperty("Postcode")]
-        public int Postcode { get; set; }
+        public int? Postcode { get; set; }
 
         [JsonProperty("State")]
         public string State { get; set; }

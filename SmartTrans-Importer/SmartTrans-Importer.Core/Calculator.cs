@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using SmartTrans_Importer.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,10 @@ namespace SmartTrans_Importer.Core
             try
             {
                 string result = DataQuery.GetRunsheet(Date, Agent);
-                ImportRecords = JsonConvert.DeserializeObject<List<SmartTransRecord>>(result);
+                var format = "dd/MM/yyyy";
+                var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = format };
+
+                ImportRecords = JsonConvert.DeserializeObject<List<SmartTransRecord>>(result, dateTimeConverter);
 
                 ImportRecords.RemoveAt(0);
                 ImportRecords.RemoveAt(ImportRecords.Count - 1);
@@ -39,9 +43,10 @@ namespace SmartTrans_Importer.Core
                 status = Status.OK;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 status = Status.ERROR;
+                Console.WriteLine(ex.Message);
             }
 
             return this;
@@ -52,7 +57,10 @@ namespace SmartTrans_Importer.Core
             try
             {
                 string result = DataQuery.GetRunsheet(Date, Agent);
-                ImportRecords = JsonConvert.DeserializeObject<List<SmartTransRecord>>(result);
+                var format = "dd/MM/yyyy";
+                var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = format };
+
+                ImportRecords = JsonConvert.DeserializeObject<List<SmartTransRecord>>(result, dateTimeConverter);
 
                 ImportRecords.RemoveAt(0);
                 ImportRecords.RemoveAt(ImportRecords.Count - 1);
@@ -76,21 +84,28 @@ namespace SmartTrans_Importer.Core
                 CollectImportRecord r = new CollectImportRecord();
                 string reason = "OTHER", other_Code = "OTHER";
 
-                if (record.Description.Length > 0)
+                if (record.Description != null)
                 {
-                    r.CompletedCount = ComputeCompletedCount(record.Description.Substring(0, 1));
-                    r.AttemptedCount = ComputeAttemptedCount(record.Description.Substring(1, 1));
+                    if (record.Description.Length > 0)
+                    {
+                        r.CompletedCount = ComputeCompletedCount(record.Description.Substring(0, 1));
+                        r.AttemptedCount = ComputeAttemptedCount(record.Description.Substring(1, 1));
+                    }
                 }
 
                 r.Identifier = ComputeIdentifier(record.Status, r.CompletedCount, r.AttemptedCount);
+
+                //r.Identifier = "OTHER";
 
                 // collect initials for driver, look up from driver db
                 if (r.Identifier.Contains("Completed"))
                     r.Driver = db.FindDriverCode(record.Driver);
 
                 r.File = record.OrderNumber;
-                r.Date = record.DeliveryDate.ToShortDateString();
-                r.Time = record.ETA;
+
+                r.Date = record.DeliveryDate.Value.ToShortDateString();
+                //r.Time = record.ETA;
+                r.Time = record.Departure;
 
                 r.Comment1 = ComputeReasonText(record.Reasons);
 
@@ -112,8 +127,8 @@ namespace SmartTrans_Importer.Core
                 r.Portal_Reason = reason;
                 r.Other_Code = other_Code;
 
-                r.Date2 = record.DeliveryDate.ToShortDateString();
-                r.Date3 = record.DeliveryDate.ToShortDateString();
+                r.Date2 = record.DeliveryDate.Value.ToShortDateString();
+                r.Date3 = record.DeliveryDate.Value.ToShortDateString();
 
                 CollectRecords.Add(r);
             }
@@ -319,27 +334,32 @@ namespace SmartTrans_Importer.Core
 
         private string ComputeIdentifier(string status, int completedcount, int attemptedcount)
         {
-            if (status.Equals("Completed"))
+            if (status != null)
             {
-                if (completedcount < 8)
+                if (status.Equals("Completed"))
                 {
-                    return "Completed" + completedcount.ToString();
+                    if (completedcount < 8)
+                    {
+                        return "Completed" + completedcount.ToString();
+                    }
+                    else
+                    {
+                        return "EXCompleted" + completedcount.ToString();
+                    }
                 }
-                else
+                else if (status.Equals("Del Exception"))
                 {
-                    return "EXCompleted" + completedcount.ToString();
+                    if (completedcount < 8)
+                    {
+                        return "Attempt" + attemptedcount.ToString();
+                    }
+                    else
+                    {
+                        return "EXAttempt" + attemptedcount.ToString();
+                    }
                 }
-            }
-            else if (status.Equals("Del Exception"))
-            {
-                if (completedcount < 8)
-                {
-                    return "Attempt" + attemptedcount.ToString();
-                }
-                else
-                {
-                    return "EXAttempt" + attemptedcount.ToString();
-                }
+
+                return "OTHER";
             }
 
             return "OTHER";
