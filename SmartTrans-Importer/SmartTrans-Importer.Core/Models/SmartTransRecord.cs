@@ -49,7 +49,7 @@ namespace SmartTrans_Importer.Core.Models
         [JsonProperty("Status")]
         public string Status { get; set; }
 
-        [JsonProperty("Reasons")]
+        [JsonProperty("Outcome")]
         public string Reasons { get; set; }
 
         [JsonProperty("CustomerRef")]

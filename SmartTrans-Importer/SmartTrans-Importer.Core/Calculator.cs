@@ -24,7 +24,6 @@ namespace SmartTrans_Importer.Core
         {
             ImportRecords = new List<SmartTransRecord>();
             CollectRecords = new List<CollectImportRecord>();
-
         }
 
         public Calculator Calculate(DateTime Date, String Agent)
@@ -107,10 +106,11 @@ namespace SmartTrans_Importer.Core
                 //r.Time = record.ETA;
                 r.Time = record.Departure;
 
-                r.Comment1 = ComputeReasonText(record.Reasons);
+                //r.Comment1 = RemoveXMLCode(record.Reasons);
+                var tempReasons = RemoveXMLCode(record.Reasons);
 
-                if (record.Reasons != null)
-                    r = CalculateComments(record, r);
+                if (tempReasons != null)
+                    r = CalculateComments(record, r, tempReasons);
 
                 if (r.Identifier == "Completed2")
                 {
@@ -121,8 +121,11 @@ namespace SmartTrans_Importer.Core
                     r.Comment8 = "";
                 }
 
-                if (record.Reasons != null)
-                    ComputeReasonandOtherCode(record.Reasons, out reason, out other_Code);
+                //if (record.Reasons != null)
+                //    ComputeReasonandOtherCode(record.Reasons, out reason, out other_Code);
+
+                if (tempReasons != null)
+                    ComputeReasonandOtherCode(tempReasons, out reason, out other_Code);
 
                 r.Portal_Reason = reason;
                 r.Other_Code = other_Code;
@@ -135,55 +138,79 @@ namespace SmartTrans_Importer.Core
         }
 
 
-        private CollectImportRecord CalculateComments(SmartTransRecord record, CollectImportRecord r)
+        private CollectImportRecord CalculateComments(SmartTransRecord record, CollectImportRecord r, string temp)
         {
-            int stringLength = record.Reasons.Length;
-
+            // int stringLength = record.Reasons.Length;
+            int stringLength = temp.Length;
             if (stringLength < 60)
             {
-                r.Comment2 = record.Reasons;
+                //r.Comment2 = record.Reasons;
+                r.Comment2 = temp;
+
             }
             else if (stringLength < 120)
             {
-                r.Comment2 = record.Reasons.Substring(0, 60);
-                r.Comment3 = record.Reasons.Substring(61, (stringLength - 60)); // this number is the remainder
+                //r.Comment2 = record.Reasons.Substring(0, 60);
+                //                                                      //- 60
+                //r.Comment3 = record.Reasons.Substring(61, (stringLength - 61)); // this number is the remainder
+                r.Comment2 = temp.Substring(0, 60);
+                //- 60
+                r.Comment3 = temp.Substring(61, (stringLength - 61)); // this number is the remainder
             }
             else if (stringLength < 180)
             {
-                r.Comment2 = record.Reasons.Substring(0, 60);
-                r.Comment3 = record.Reasons.Substring(61, 60);
-                r.Comment4 = record.Reasons.Substring(121, (stringLength - 121)); // this number is the remainder
+                //r.Comment2 = record.Reasons.Substring(0, 60);
+                //r.Comment3 = record.Reasons.Substring(61, 60);
+                //r.Comment4 = record.Reasons.Substring(121, (stringLength - 121)); // this number is the remainder
+                r.Comment2 = temp.Substring(0, 60);
+                r.Comment3 = temp.Substring(61, 60);
+                r.Comment4 = temp.Substring(121, (stringLength - 121)); // this number is the remainder
             }
             else if (stringLength < 240)
             {
-                r.Comment2 = record.Reasons.Substring(0, 60);
-                r.Comment3 = record.Reasons.Substring(61, 60);
-                r.Comment4 = record.Reasons.Substring(121, 60);
-                r.Comment5 = record.Reasons.Substring(181, (stringLength - 181)); // this number is the remainder
+                //r.Comment2 = record.Reasons.Substring(0, 60);
+                //r.Comment3 = record.Reasons.Substring(61, 60);
+                //r.Comment4 = record.Reasons.Substring(121, 60);
+                //r.Comment5 = record.Reasons.Substring(181, (stringLength - 181)); // this number is the remainder
+                r.Comment2 = temp.Substring(0, 60);
+                r.Comment3 = temp.Substring(61, 60);
+                r.Comment4 = temp.Substring(121, 60);
+                r.Comment5 = temp.Substring(181, (stringLength - 181)); // this number is the remainder
 
             }
             else if (stringLength < 300)
             {
-                r.Comment2 = record.Reasons.Substring(0, 60);
-                r.Comment3 = record.Reasons.Substring(61, 60);
-                r.Comment4 = record.Reasons.Substring(121, 60);
-                r.Comment5 = record.Reasons.Substring(181, 60);
-                r.Comment6 = record.Reasons.Substring(241, (stringLength - 241)); // this number is the remainder
+                //r.Comment2 = record.Reasons.Substring(0, 60);
+                //r.Comment3 = record.Reasons.Substring(61, 60);
+                //r.Comment4 = record.Reasons.Substring(121, 60);
+                //r.Comment5 = record.Reasons.Substring(181, 60);
+                //r.Comment6 = record.Reasons.Substring(241, (stringLength - 241)); // this number is the remainder
+                r.Comment2 = temp.Substring(0, 60);
+                r.Comment3 = temp.Substring(61, 60);
+                r.Comment4 = temp.Substring(121, 60);
+                r.Comment5 = temp.Substring(181, 60);
+                r.Comment6 = temp.Substring(241, (stringLength - 241)); // this number is the remainder
             }
             else
             {
-                r.Comment2 = record.Reasons.Substring(0, 60);
-                r.Comment3 = record.Reasons.Substring(61, 60);
-                r.Comment4 = record.Reasons.Substring(121, 60);
-                r.Comment5 = record.Reasons.Substring(181, 60);
-                r.Comment6 = record.Reasons.Substring(241, 60);
-                r.Comment7 = record.Reasons.Substring(301, (stringLength - 301)); // this number is the remainder
+                //r.Comment2 = record.Reasons.Substring(0, 60);
+                //r.Comment3 = record.Reasons.Substring(61, 60);
+                //r.Comment4 = record.Reasons.Substring(121, 60);
+                //r.Comment5 = record.Reasons.Substring(181, 60);
+                //r.Comment6 = record.Reasons.Substring(241, 60);
+                //r.Comment7 = record.Reasons.Substring(301, (stringLength - 301)); // this number is the remainder
+                r.Comment2 = temp.Substring(0, 60);
+                r.Comment3 = temp.Substring(61, 60);
+                r.Comment4 = temp.Substring(121, 60);
+                r.Comment5 = temp.Substring(181, 60);
+                r.Comment6 = temp.Substring(241, 60);
+                r.Comment7 = temp.Substring(301, (stringLength - 301)); // this number is the remainder
             }
 
             return r;
         }
 
-        private string ComputeReasonText(string reasons)
+        private string RemoveXMLCode(string reasons)
         {
             string contents = string.Empty;
 
@@ -197,7 +224,7 @@ namespace SmartTrans_Importer.Core
                 {
                     if (child.NodeType == XmlNodeType.Element)
                     {
-                        contents += child.InnerText;
+                        contents += (child.InnerText + " ");
                     }
                 }
             }
@@ -219,90 +246,90 @@ namespace SmartTrans_Importer.Core
             reason = "";
             other_Code = "";
 
-            if (reasons.Equals("Partnership Person in Charge"))
+            if (reasons.Trim().Equals("Partnership Person in Charge"))
             {
                 reason = "Business Principal";
                 other_Code = "1";
             }
-            else if (reasons.Equals("Partners Handing"))
+            else if (reasons.Trim().Equals("Partners Handing"))
             {
                 reason = "Handing Partners";
                 other_Code = "2";
             }
-            else if (reasons.Equals("Individual"))
+            else if (reasons.Trim().Equals("Individual"))
             {
                 reason = "Individual";
                 other_Code = "3";
             }
-            else if (reasons.Equals("Pty Ltd Lawyer"))
+            else if (reasons.Trim().Equals("Pty Ltd Lawyer"))
             {
                 reason = "Lawyer Corporation";
                 other_Code = "4";
             }
-            else if (reasons.Equals("Public Lawyer"))
+            else if (reasons.Trim().Equals("Public Lawyer"))
             {
                 reason = "Lawyer Public";
                 other_Code = "5";
             }
-            else if (reasons.Equals("Individual Lawyer"))
+            else if (reasons.Trim().Equals("Individual Lawyer"))
             {
                 reason = "Lawyers Individual";
                 other_Code = "6";
             }
-            else if (reasons.Equals("Individual Person 18 - Residence"))
+            else if (reasons.Trim().Equals("Individual Person 18 - Residence"))
             {
                 reason = "Person 18";
                 other_Code = "19";
             }
-            else if (reasons.Equals("Individual Person 18 - Business"))
+            else if (reasons.Trim().Equals("Individual Person 18 - Business"))
             {
                 reason = "Person 18";
                 other_Code = "20";
             }
-            else if (reasons.Equals("Pty Ltd- Person in Charge"))
+            else if (reasons.Trim().Equals("Pty Ltd- Person in Charge"))
             {
                 reason = "Person Corporation";
                 other_Code = "9";
             }
-            else if (reasons.Equals("Pre Paid Post"))
+            else if (reasons.Trim().Equals("Pre Paid Post"))
             {
                 reason = "Pre Paid Post";
                 other_Code = "10";
             }
-            else if (reasons.Equals("Pty Ltd - Registered Office"))
+            else if (reasons.Trim().Equals("Pty Ltd - Registered Office"))
             {
                 reason = "Registered Office";
                 other_Code = "11";
             }
-            else if (reasons.Equals("value 12"))
+            else if (reasons.Trim().Equals("value 12"))
             {
                 reason = "value 12";
             }
-            else if (reasons.Equals("Individual Placed"))
+            else if (reasons.Trim().Equals("Individual Placed"))
             {
                 other_Code = "12";
             }
-            else if (reasons.Equals("Individual Prison"))
+            else if (reasons.Trim().Equals("Individual Prison"))
             {
                 other_Code = "13";
             }
-            else if (reasons.Equals("Individual Guardian"))
+            else if (reasons.Trim().Equals("Individual Guardian"))
             {
                 other_Code = "14";
             }
-            else if (reasons.Equals("Individual Guardian Placed"))
+            else if (reasons.Trim().Equals("Individual Guardian Placed"))
             {
                 other_Code = "15";
             }
-            else if (reasons.Equals("Partners Placed"))
+            else if (reasons.Trim().Equals("Partners Placed"))
             {
                 other_Code = "16";
             }
-            else if (reasons.Equals("Public CEO"))
+            else if (reasons.Trim().Equals("Public CEO"))
             {
                 other_Code = "17";
             }
-            else if (reasons.Equals("Pty Ltd - Registered Office - Unattended"))
+            else if (reasons.Trim().Equals("Pty Ltd - Registered Office - Unattended"))
             {
                 other_Code = "18";
             }
