@@ -28,8 +28,8 @@ namespace SmartTrans_Importer.Tests
         [TestMethod]
         public void TestConvertJsonToObject()
         {
-            var Date = new DateTime(2016, 09, 27);
-            var Agent = "JVW";
+            var Date = new DateTime(2016, 10, 19);
+            var Agent = "TK";
             
             string result = DataQuery.GetRunsheet(Date, Agent);
 

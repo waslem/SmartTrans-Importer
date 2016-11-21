@@ -23,8 +23,12 @@ namespace SmartTrans_Importer.Core
             {
                 foreach (var record in calc.CollectRecords)
                 {
-                    ExportRecord exportRecord = Exporter.CreateFromCollectImportRecord(record);
-                    engine.WriteNext(exportRecord);
+                    // filter out those not completed.
+                    if (record.Identifier != "OTHER")
+                    {
+                        ExportRecord exportRecord = Exporter.CreateFromCollectImportRecord(record);
+                        engine.WriteNext(exportRecord);
+                    }
                 }
             }
         }
@@ -49,7 +53,7 @@ namespace SmartTrans_Importer.Core
         {
             ExportRecord record = new ExportRecord();
 
-            record.Comment1 = c_record.Comment1;
+            record.Comment1 = ('"' + c_record.Comment1.TrimEnd() + '"');
             record.Comment2 = c_record.Comment2;
             record.Comment3 = c_record.Comment3;
             record.Comment4 = c_record.Comment4;

@@ -109,8 +109,10 @@ namespace SmartTrans_Importer.Core
                 //r.Comment1 = RemoveXMLCode(record.Reasons);
                 var tempReasons = RemoveXMLCode(record.Reasons);
 
-                if (tempReasons != null)
-                    r = CalculateComments(record, r, tempReasons);
+                r.Comment1 = tempReasons;
+                var tempComments = record.DriverComment;
+                if (tempComments != null)
+                    r = CalculateComments(record, r, tempComments);
 
                 if (r.Identifier == "Completed2")
                 {
@@ -141,6 +143,8 @@ namespace SmartTrans_Importer.Core
         private CollectImportRecord CalculateComments(SmartTransRecord record, CollectImportRecord r, string temp)
         {
             // int stringLength = record.Reasons.Length;
+            temp = temp.Replace("\r", string.Empty).Replace("\n", string.Empty);
+
             int stringLength = temp.Length;
             if (stringLength < 60)
             {
@@ -155,7 +159,7 @@ namespace SmartTrans_Importer.Core
                 //r.Comment3 = record.Reasons.Substring(61, (stringLength - 61)); // this number is the remainder
                 r.Comment2 = temp.Substring(0, 60);
                 //- 60
-                r.Comment3 = temp.Substring(61, (stringLength - 61)); // this number is the remainder
+                r.Comment3 = temp.Substring(60, (stringLength - 60)); // this number is the remainder
             }
             else if (stringLength < 180)
             {
@@ -163,8 +167,8 @@ namespace SmartTrans_Importer.Core
                 //r.Comment3 = record.Reasons.Substring(61, 60);
                 //r.Comment4 = record.Reasons.Substring(121, (stringLength - 121)); // this number is the remainder
                 r.Comment2 = temp.Substring(0, 60);
-                r.Comment3 = temp.Substring(61, 60);
-                r.Comment4 = temp.Substring(121, (stringLength - 121)); // this number is the remainder
+                r.Comment3 = temp.Substring(60, 60);
+                r.Comment4 = temp.Substring(120, (stringLength - 120)); // this number is the remainder
             }
             else if (stringLength < 240)
             {
@@ -246,6 +250,7 @@ namespace SmartTrans_Importer.Core
             reason = "";
             other_Code = "";
 
+
             if (reasons.Trim().Equals("Partnership Person in Charge"))
             {
                 reason = "Business Principal";
@@ -307,30 +312,37 @@ namespace SmartTrans_Importer.Core
             }
             else if (reasons.Trim().Equals("Individual Placed"))
             {
+                reason = "OTHER";
                 other_Code = "12";
             }
             else if (reasons.Trim().Equals("Individual Prison"))
             {
+                reason = "OTHER";
                 other_Code = "13";
             }
             else if (reasons.Trim().Equals("Individual Guardian"))
             {
+                reason = "OTHER";
                 other_Code = "14";
             }
             else if (reasons.Trim().Equals("Individual Guardian Placed"))
             {
+                reason = "OTHER";
                 other_Code = "15";
             }
             else if (reasons.Trim().Equals("Partners Placed"))
             {
+                reason = "OTHER";
                 other_Code = "16";
             }
             else if (reasons.Trim().Equals("Public CEO"))
             {
+                reason = "OTHER";
                 other_Code = "17";
             }
             else if (reasons.Trim().Equals("Pty Ltd - Registered Office - Unattended"))
             {
+                reason = "OTHER";
                 other_Code = "18";
             }
             else
@@ -365,7 +377,11 @@ namespace SmartTrans_Importer.Core
             {
                 if (status.Equals("Completed"))
                 {
-                    if (completedcount < 8)
+                    if (completedcount == 0)
+                    {
+                        return "ExCompletedFA";
+                    }
+                    else if (completedcount < 8)
                     {
                         return "Completed" + completedcount.ToString();
                     }
@@ -376,7 +392,11 @@ namespace SmartTrans_Importer.Core
                 }
                 else if (status.Equals("Del Exception"))
                 {
-                    if (completedcount < 8)
+                    if (completedcount == 0)
+                    {
+                        return "EXAttemptFA";
+                    }
+                    else if (completedcount < 8)
                     {
                         return "Attempt" + attemptedcount.ToString();
                     }

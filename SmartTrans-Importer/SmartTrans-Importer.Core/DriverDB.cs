@@ -41,6 +41,7 @@ namespace SmartTrans_Importer.Core
             Drivers.Add(new Driver { AgentId = "JS", Name = "J SEATON" });
             Drivers.Add(new Driver { AgentId = "JT", Name = "J THABANO" });
             Drivers.Add(new Driver { AgentId = "CH", Name = "C HAGART" });
+            Drivers.Add(new Driver { AgentId = "MK", Name = "M KOH" });
         }
 
         internal string FindDriverCode(string driver)
