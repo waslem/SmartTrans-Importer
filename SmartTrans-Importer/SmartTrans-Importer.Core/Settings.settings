@@ -6,13 +6,13 @@
       <Value Profile="(Default)">C:\temp\</Value>
     </Setting>
     <Setting Name="ApiUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://staging.esolution.net.au</Value>
+      <Value Profile="(Default)">https://www.esolution.net.au</Value>
     </Setting>
     <Setting Name="eSolutionsLogin" Type="System.String" Scope="User">
       <Value Profile="(Default)">epadmin</Value>
     </Setting>
     <Setting Name="eSolutionsPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1234</Value>
+      <Value Profile="(Default)">B4111ff$4</Value>
     </Setting>
     <Setting Name="ProxyAddress" Type="System.String" Scope="User">
       <Value Profile="(Default)">auproxy.bcs.corp</Value>

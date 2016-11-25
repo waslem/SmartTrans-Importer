@@ -37,7 +37,7 @@ namespace SmartTrans_Importer.Core {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://staging.esolution.net.au")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.esolution.net.au")]
         public string ApiUrl {
             get {
                 return ((string)(this["ApiUrl"]));
@@ -61,7 +61,7 @@ namespace SmartTrans_Importer.Core {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1234")]
+        [global::System.Configuration.DefaultSettingValueAttribute("B4111ff$4")]
         public string eSolutionsPassword {
             get {
                 return ((string)(this["eSolutionsPassword"]));

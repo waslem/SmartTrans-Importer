@@ -109,19 +109,10 @@ namespace SmartTrans_Importer.Core
                 //r.Comment1 = RemoveXMLCode(record.Reasons);
                 var tempReasons = RemoveXMLCode(record.Reasons);
 
-                r.Comment1 = tempReasons;
+                // here 
+                //r.Comment1 = tempReasons;
                 var tempComments = record.DriverComment;
-                if (tempComments != null)
-                    r = CalculateComments(record, r, tempComments);
-
-                if (r.Identifier == "Completed2")
-                {
-                    r.Comment8 = "Property Placed Under Seizure";
-                }
-                else
-                {
-                    r.Comment8 = "";
-                }
+                r = CalculateComments(record, r, tempComments, tempReasons);
 
                 //if (record.Reasons != null)
                 //    ComputeReasonandOtherCode(record.Reasons, out reason, out other_Code);
@@ -132,6 +123,17 @@ namespace SmartTrans_Importer.Core
                 r.Portal_Reason = reason;
                 r.Other_Code = other_Code;
 
+                r = FixPssos(r, record, db);
+
+                if (r.Identifier == "Completed2")
+                {
+                    r.Comment8 = "Property Placed Under Seizure";
+                }
+                else
+                {
+                    r.Comment8 = "";
+                }
+
                 r.Date2 = record.DeliveryDate.Value.ToShortDateString();
                 r.Date3 = record.DeliveryDate.Value.ToShortDateString();
 
@@ -139,76 +141,196 @@ namespace SmartTrans_Importer.Core
             }
         }
 
+        private CollectImportRecord FixPssos(CollectImportRecord r, SmartTransRecord record, DriverDB db)
+        {
+            if (record.Description != null)
+            {
+                if (record.Description.Contains("Form 25 - Property Seizure and Sale Order"))
+                {
+                    if (record.Reasons != null)
+                    {
+                        if (record.Reasons.Contains("Completed PSSO"))
+                        {
+                            r.Identifier = "Completed2";
+                            if (record.Reasons.Contains("Completed PSSO - Individual Person"))
+                            {
+                                r.Portal_Reason = "Person 18";
+                                r.Other_Code = "19";
+                                r.Comment1 = "Individual Person 18 - Residence";
+                                r.Driver = db.FindDriverCode(record.Driver);
+                            }
+                            else if (record.Reasons.Contains("Completed PSSO - Individual Business"))
+                            {
+                                r.Portal_Reason = "Person 18";
+                                r.Other_Code = "20";
+                                r.Comment1 = "Individual Person 18 - Business";
+                                r.Driver = db.FindDriverCode(record.Driver);
+                            }
+                            else
+                            {
+                                r.Portal_Reason = "OTHER";
+                                r.Other_Code = "OTHER";
+                                r.Comment1 = "Other";
+                                r.Driver = db.FindDriverCode(record.Driver);
+                            }
+                        }
+                    }
+                }
+            }
 
-        private CollectImportRecord CalculateComments(SmartTransRecord record, CollectImportRecord r, string temp)
+            return r;
+        }
+
+        private CollectImportRecord CalculateComments(SmartTransRecord record, CollectImportRecord r, string tempComments, string tempReasons)
         {
             // int stringLength = record.Reasons.Length;
-            temp = temp.Replace("\r", string.Empty).Replace("\n", string.Empty);
 
-            int stringLength = temp.Length;
-            if (stringLength < 60)
+            int commentLength = 0;
+            int ReasonLineCount = 0;
+            if (tempComments != null)
             {
-                //r.Comment2 = record.Reasons;
-                r.Comment2 = temp;
+                tempComments = tempComments.Replace("\r", string.Empty).Replace("\n", string.Empty);
+                commentLength = tempComments.Length;
+            }
+
+            if (tempReasons != null)
+                ReasonLineCount = tempReasons.Length;
+
+            if (ReasonLineCount < 60)
+            {
+                r.Comment1 = tempReasons;
+
+                if (commentLength < 60)
+                {
+                    r.Comment2 = tempComments;
+                }
+                else if (commentLength < 120)
+                {
+                    r.Comment2 = tempComments.Substring(0, 60);
+                    r.Comment3 = tempComments.Substring(60, (commentLength - 60)); // this number is the remainder
+                }
+                else if (commentLength < 180)
+                {
+                    r.Comment2 = tempComments.Substring(0, 60);
+                    r.Comment3 = tempComments.Substring(60, 60);
+                    r.Comment4 = tempComments.Substring(120, (commentLength - 120)); // this number is the remainder
+                }
+                else if (commentLength < 240)
+                {
+                    r.Comment2 = tempComments.Substring(0, 60);
+                    r.Comment3 = tempComments.Substring(61, 60);
+                    r.Comment4 = tempComments.Substring(121, 60);
+                    r.Comment5 = tempComments.Substring(181, (commentLength - 181)); // this number is the remainder
+
+                }
+                else if (commentLength < 300)
+                {
+                    r.Comment2 = tempComments.Substring(0, 60);
+                    r.Comment3 = tempComments.Substring(61, 60);
+                    r.Comment4 = tempComments.Substring(121, 60);
+                    r.Comment5 = tempComments.Substring(181, 60);
+                    r.Comment6 = tempComments.Substring(241, (commentLength - 241)); // this number is the remainder
+                }
+            }
+            else if (ReasonLineCount < 120)
+            {
+                r.Comment1 = tempReasons.Substring(0, 60);
+                r.Comment2 = tempReasons.Substring(60, (ReasonLineCount - 60)); // this number is the remainder
+
+                if (commentLength < 60)
+                {
+                    r.Comment3 = tempComments;
+                }
+                else if (commentLength < 120)
+                {
+                    r.Comment3 = tempComments.Substring(0, 60);
+                    r.Comment4 = tempComments.Substring(60, (commentLength - 60)); // this number is the remainder
+                }
+                else if (commentLength < 180)
+                {
+                    r.Comment3 = tempComments.Substring(0, 60);
+                    r.Comment4 = tempComments.Substring(60, 60);
+                    r.Comment5 = tempComments.Substring(120, (commentLength - 120)); // this number is the remainder
+                }
+                else if (commentLength < 240)
+                {
+                    r.Comment3 = tempComments.Substring(0, 60);
+                    r.Comment4 = tempComments.Substring(61, 60);
+                    r.Comment5 = tempComments.Substring(121, 60);
+                    r.Comment6 = tempComments.Substring(181, (commentLength - 181)); // this number is the remainder
+
+                }
+                else if (commentLength < 300)
+                {
+                    r.Comment3 = tempComments.Substring(0, 60);
+                    r.Comment4 = tempComments.Substring(61, 60);
+                    r.Comment5 = tempComments.Substring(121, 60);
+                    r.Comment6 = tempComments.Substring(181, 60);
+                    r.Comment7 = tempComments.Substring(241, (commentLength - 241)); // this number is the remainder
+                }
+            }
+            else if (ReasonLineCount < 180)
+            {
+                r.Comment1 = tempReasons.Substring(0, 60);
+                r.Comment2 = tempReasons.Substring(60, 60);
+                r.Comment3 = tempReasons.Substring(120, (ReasonLineCount - 120)); // this number is the remainder
+
+                if (commentLength < 60)
+                {
+                    r.Comment4 = tempComments;
+                }
+                else if (commentLength < 120)
+                {
+
+                    r.Comment4 = tempComments.Substring(0, 60);
+                    r.Comment5 = tempComments.Substring(60, (commentLength - 60)); // this number is the remainder
+                }
+                else if (commentLength < 180)
+                {
+                    r.Comment4 = tempComments.Substring(0, 60);
+                    r.Comment5 = tempComments.Substring(60, 60);
+                    r.Comment6 = tempComments.Substring(120, (commentLength - 120)); // this number is the remainder
+                }
+                else if (commentLength < 240)
+                {
+                    r.Comment4 = tempComments.Substring(0, 60);
+                    r.Comment5 = tempComments.Substring(61, 60);
+                    r.Comment6 = tempComments.Substring(121, 60);
+                    r.Comment7 = tempComments.Substring(181, (commentLength - 181)); // this number is the remainder
+                }
+                else if (commentLength < 300)
+                {
+                    r.Comment4 = tempComments.Substring(0, 60);
+                    r.Comment5 = tempComments.Substring(61, 60);
+                    r.Comment6 = tempComments.Substring(121, 60);
+                    r.Comment7 = tempComments.Substring(181, 60);
+                    r.Comment8 = tempComments.Substring(241, (commentLength - 241)); // this number is the remainder
+                }
+            }
+            else if (ReasonLineCount < 240)
+            {
+                r.Comment1 = tempReasons.Substring(0, 60);
+                r.Comment2 = tempReasons.Substring(61, 60);
+                r.Comment3 = tempReasons.Substring(121, 60);
+                r.Comment4 = tempReasons.Substring(181, (ReasonLineCount - 181)); // this number is the remainder
 
             }
-            else if (stringLength < 120)
+            else if (ReasonLineCount < 300)
             {
-                //r.Comment2 = record.Reasons.Substring(0, 60);
-                //                                                      //- 60
-                //r.Comment3 = record.Reasons.Substring(61, (stringLength - 61)); // this number is the remainder
-                r.Comment2 = temp.Substring(0, 60);
-                //- 60
-                r.Comment3 = temp.Substring(60, (stringLength - 60)); // this number is the remainder
-            }
-            else if (stringLength < 180)
-            {
-                //r.Comment2 = record.Reasons.Substring(0, 60);
-                //r.Comment3 = record.Reasons.Substring(61, 60);
-                //r.Comment4 = record.Reasons.Substring(121, (stringLength - 121)); // this number is the remainder
-                r.Comment2 = temp.Substring(0, 60);
-                r.Comment3 = temp.Substring(60, 60);
-                r.Comment4 = temp.Substring(120, (stringLength - 120)); // this number is the remainder
-            }
-            else if (stringLength < 240)
-            {
-                //r.Comment2 = record.Reasons.Substring(0, 60);
-                //r.Comment3 = record.Reasons.Substring(61, 60);
-                //r.Comment4 = record.Reasons.Substring(121, 60);
-                //r.Comment5 = record.Reasons.Substring(181, (stringLength - 181)); // this number is the remainder
-                r.Comment2 = temp.Substring(0, 60);
-                r.Comment3 = temp.Substring(61, 60);
-                r.Comment4 = temp.Substring(121, 60);
-                r.Comment5 = temp.Substring(181, (stringLength - 181)); // this number is the remainder
-
-            }
-            else if (stringLength < 300)
-            {
-                //r.Comment2 = record.Reasons.Substring(0, 60);
-                //r.Comment3 = record.Reasons.Substring(61, 60);
-                //r.Comment4 = record.Reasons.Substring(121, 60);
-                //r.Comment5 = record.Reasons.Substring(181, 60);
-                //r.Comment6 = record.Reasons.Substring(241, (stringLength - 241)); // this number is the remainder
-                r.Comment2 = temp.Substring(0, 60);
-                r.Comment3 = temp.Substring(61, 60);
-                r.Comment4 = temp.Substring(121, 60);
-                r.Comment5 = temp.Substring(181, 60);
-                r.Comment6 = temp.Substring(241, (stringLength - 241)); // this number is the remainder
+                r.Comment1 = tempReasons.Substring(0, 60);
+                r.Comment2 = tempReasons.Substring(61, 60);
+                r.Comment3 = tempReasons.Substring(121, 60);
+                r.Comment4 = tempReasons.Substring(181, 60);
+                r.Comment5 = tempReasons.Substring(241, (ReasonLineCount - 241)); // this number is the remainder
             }
             else
             {
-                //r.Comment2 = record.Reasons.Substring(0, 60);
-                //r.Comment3 = record.Reasons.Substring(61, 60);
-                //r.Comment4 = record.Reasons.Substring(121, 60);
-                //r.Comment5 = record.Reasons.Substring(181, 60);
-                //r.Comment6 = record.Reasons.Substring(241, 60);
-                //r.Comment7 = record.Reasons.Substring(301, (stringLength - 301)); // this number is the remainder
-                r.Comment2 = temp.Substring(0, 60);
-                r.Comment3 = temp.Substring(61, 60);
-                r.Comment4 = temp.Substring(121, 60);
-                r.Comment5 = temp.Substring(181, 60);
-                r.Comment6 = temp.Substring(241, 60);
-                r.Comment7 = temp.Substring(301, (stringLength - 301)); // this number is the remainder
+                r.Comment1 = tempReasons.Substring(0, 60);
+                r.Comment2 = tempReasons.Substring(61, 60);
+                r.Comment3 = tempReasons.Substring(121, 60);
+                r.Comment4 = tempReasons.Substring(181, 60);
+                r.Comment5 = tempReasons.Substring(241, 60);
+                r.Comment6 = tempReasons.Substring(301, (ReasonLineCount - 301)); // this number is the remainder
             }
 
             return r;
@@ -238,11 +360,6 @@ namespace SmartTrans_Importer.Core
             }
 
             return contents;
-        }
-
-        private string ComputePortalReason()
-        {
-            throw new NotImplementedException();
         }
 
         private void ComputeReasonandOtherCode(string reasons, out string reason, out string other_Code)

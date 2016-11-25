@@ -53,20 +53,28 @@ namespace SmartTrans_Importer.Core
         {
             ExportRecord record = new ExportRecord();
 
-            record.Comment1 = ('"' + c_record.Comment1.TrimEnd() + '"');
-            record.Comment2 = c_record.Comment2;
-            record.Comment3 = c_record.Comment3;
-            record.Comment4 = c_record.Comment4;
-            record.Comment5 = c_record.Comment5;
-            record.Comment6 = c_record.Comment6;
-            record.Comment7 = c_record.Comment7;
-            record.Comment8 = c_record.Comment8;
+            if (c_record.Comment1 != null)
+                record.Comment1 = ('"' + c_record.Comment1.TrimEnd() + '"');
+            if (c_record.Comment2 != null)
+                record.Comment2 = ('"' + c_record.Comment2.TrimEnd() + '"');
+            if (c_record.Comment3 != null)
+                record.Comment3 = ('"' + c_record.Comment3.TrimEnd() + '"');
+            if (c_record.Comment4 != null)
+                record.Comment4 = ('"' + c_record.Comment4.TrimEnd() + '"');
+            if (c_record.Comment5 != null)
+                record.Comment5 = ('"' + c_record.Comment5.TrimEnd() + '"');
+            if (c_record.Comment6 != null)
+                record.Comment6 = ('"' + c_record.Comment6.TrimEnd() + '"');
+            if (c_record.Comment7 != null)
+                record.Comment7 = ('"' + c_record.Comment7.TrimEnd() + '"');
+            if (c_record.Comment8 != null)
+                record.Comment8 = ('"' + c_record.Comment8.TrimEnd() + '"');
             record.Date = c_record.Date;
             record.Date2 = c_record.Date2;
             record.Date3 = c_record.Date3;
-            record.Driver = c_record.Driver;
+            record.Driver = c_record.Driver + ",,,";
             record.File = c_record.File;
-            record.Identifier = c_record.Identifier;
+            record.Identifier = c_record.Identifier + " ";
             record.Other_Code = c_record.Other_Code;
             record.Portal_Reason = c_record.Portal_Reason;
             record.Time = c_record.Time;
@@ -77,7 +85,7 @@ namespace SmartTrans_Importer.Core
 
         public static string CreateHeader()
         {
-            return @"Identifier,File,Date,Time,Comment1,Comment2,Comment3,Comment4,Comment5,Comment6,Comment7,Comment8,Portal Reason,Other Code,Date2,Date3,Driver";
+            return @"Identifier,File,Date,Time,Comment1,Comment2,Comment3,Comment4,Comment5,Comment6,Comment7,Comment8,Portal Reason,Other Code,Date2,Date3,Driver,,,";
         }
     }
 }
