@@ -46,7 +46,7 @@ namespace SmartTrans_Importer.Core
 
         internal string FindDriverCode(string driver)
         {
-            return Drivers.First(u => u.Name == driver).AgentId;
+            return Drivers.First(u => u.Name.ToUpper() == driver.ToUpper()).AgentId;
         }
 
         /// <summary>
